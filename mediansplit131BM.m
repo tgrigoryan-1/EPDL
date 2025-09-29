@@ -1,4 +1,4 @@
-% Code for MAE131A Spring 25 Median Split vs Performance Analysis
+% Code for MAE131A Spring 25 Median Split vs Performance Analysis Midterm Exam / Participation Before Midterm
 % Change the directory to where the csv files are downloaded
 cd('C:\Users\tigrr\Downloads')
 
