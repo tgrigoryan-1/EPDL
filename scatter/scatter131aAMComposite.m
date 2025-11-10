@@ -35,4 +35,4 @@ legend('Student Data', sprintf('Linear Fit: y = %.2fx + %.2f', coeff(1), coeff(2
 hold off;
 
 % Send back into original directory
-cd('C:\Users\tigrr\UCSD\EPDL')
+cd('C:\Users\tigrr\UCSD\EPDL\scatter')
