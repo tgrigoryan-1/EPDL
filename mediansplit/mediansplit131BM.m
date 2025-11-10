@@ -31,3 +31,5 @@ NBelow = height(groupBelow)
 % Doing a two-sample t-test to see if there is significant difference in the means of the groups
 [h,p] = ttest2(groupAbove.MidtermExam_971071_,groupBelow.MidtermExam_971071_)
 
+% Send back into original directory
+cd('C:\Users\tigrr\UCSD\EPDL\mediansplit')

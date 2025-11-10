@@ -48,4 +48,4 @@ NBelow = height(groupBelow)
 [h,p] = ttest2(groupAbove.MidtermExam_971071_,groupBelow.MidtermExam_971071_)
 
 % Send back into original directory
-cd('C:\Users\tigrr\UCSD\EPDL')
+cd('C:\Users\tigrr\UCSD\EPDL\mediansplit')
