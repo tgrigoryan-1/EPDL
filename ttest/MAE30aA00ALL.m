@@ -139,5 +139,22 @@ for k = 1:63
     end
 end
 
+% Also check the growth mindset questions, specifically their mean differences
+for k = 53:55
+	prefBOQ = "BOQ_Q" + k;
+    prefEOQ = "EOQ_Q" + k;
+    meandiff = mean(fullsetfil.(prefEOQ)) - mean(fullsetfil.(prefBOQ));
+    if meandiff > 0
+    	meanind = "EOQ > BOQ, increase";
+    elseif meandiff < 0
+    	meanind = "EOQ < BOQ, decrease";
+    else
+    	meanind = "no mean difference";
+    end
+    disp("-------------------------------------------------------------------------------------------------------------------------------")
+    disp("For growth mindset questions: " + origNames{k})
+    disp("Mean Difference (EOQ - BOQ) = " + string(meandiff) + " -> " + meanind)
+end
+
 % Send back into original directory
 cd('C:\Users\tigrr\UCSD\EPDL\ttest')
