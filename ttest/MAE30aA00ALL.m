@@ -118,13 +118,24 @@ origNames = boq_data_fil2.Properties.VariableDescriptions;
 
 for k = 1:63
     if pvals(k) <= 0.05
-        
+        prefBOQ = "BOQ_Q" + k;
+    	prefEOQ = "EOQ_Q" + k;
+    	meandiff = mean(fullsetfil.(prefEOQ)) - mean(fullsetfil.(prefBOQ));
+    	if meandiff > 0
+    		meanind = "EOQ > BOQ, increase";
+    	elseif meandiff < 0
+    		meanind = "EOQ < BOQ, decrease";
+    	else
+    		meanind = "no mean difference";
+    	end
+
         % Retrieve the full question text by indexing
         fullQuestion = origNames{k};
 
         disp("-------------------------------------------------------------------------------------------------------------------------------")
         disp("Q" + k + " is significant with p = " + string(pvals(k)));
         disp("Full question text: " + fullQuestion)
+        disp("Mean Difference (EOQ - BOQ) = " + string(meandiff) + " -> " + meanind)
     end
 end
 
