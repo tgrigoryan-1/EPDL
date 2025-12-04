@@ -85,7 +85,7 @@ boq_data_unq = boq_data_fil3(idx_boq,:);
 eoq_data_unq = eoq_data_fil3(idx_eoq,:);
 
 % Now to use innerjoin to weed out anyone that isn't on both lists, since I named them different I have to use Left and Right Keys
-fullsetfil = innerjoin(boq_data_unq,eoq_data_unq,'LeftKeys','BOQ_PID','RightKeys','EOQ_PID');
+fullsetfil = innerjoin(boq_data_unq,eoq_data_unq,'LeftKeys','BOQ_PID','RightKeys','EOQ_PID')
 
 % We need to use the convert function again for all the data to get only the double values to run t-test
 varNames = fullsetfil.Properties.VariableNames;
