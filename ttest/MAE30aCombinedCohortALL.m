@@ -85,7 +85,7 @@ boq_data_unq = boq_data_fil3(idx_boq,:);
 eoq_data_unq = eoq_data_fil3(idx_eoq,:);
 
 % Now to use innerjoin to weed out anyone that isn't on both lists, since I named them different I have to use Left and Right Keys
-fullsetfil = innerjoin(boq_data_unq,eoq_data_unq,'LeftKeys','BOQ_PID','RightKeys','EOQ_PID')
+fullsetfil = innerjoin(boq_data_unq,eoq_data_unq,'LeftKeys','BOQ_PID','RightKeys','EOQ_PID');
 
 % We need to use the convert function again for all the data to get only the double values to run t-test
 varNames = fullsetfil.Properties.VariableNames;
@@ -153,6 +153,28 @@ for k = 53:55
     disp("For growth mindset questions: " + origNames{k})
     disp("Mean Difference (EOQ - BOQ) = " + string(meandiff) + " -> " + meanind)
 end
+
+% Average out the growth mindset questions
+% 53,54,55 are the growth mindset questions
+growthMindsetVecBOQ = fullsetfil.BOQ_Q53 + fullsetfil.BOQ_Q54 + fullsetfil.BOQ_Q55;
+growthMindsetVecEOQ = fullsetfil.EOQ_Q53 + fullsetfil.EOQ_Q54 + fullsetfil.EOQ_Q55;
+[~, pvalgrowth] = ttest(growthMindsetVecBOQ, growthMindsetVecEOQ);
+meandiff = mean(growthMindsetVecEOQ) - mean(growthMindsetVecBOQ);
+if meandiff > 0
+    meanind = "EOQ > BOQ, increase";
+elseif meandiff < 0
+    meanind = "EOQ < BOQ, decrease";
+else
+    meanind = "no mean difference";
+end
+meandiff = mean(growthMindsetVecEOQ) - mean(growthMindsetVecBOQ);
+disp("-------------------------------------------------------------------------------------------------------------------------------")
+if pvalgrowth <= 0.05
+    disp("Growth Mindset Question Average is significant with p = " + string(pvalgrowth));
+else
+    disp("Growth Mindset Question Average is not significant with p = " + string(pvalgrowth));
+end
+disp("Mean Difference (EOQ - BOQ) = " + string(meandiff) + " -> " + meanind);
 
 % Send back into original directory
 cd('C:\Users\tigrr\UCSD\EPDL\ttest')
