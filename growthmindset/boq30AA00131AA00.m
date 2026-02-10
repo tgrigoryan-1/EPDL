@@ -1,4 +1,4 @@
-% Code for MAE30A A00 Winter 25 BOQ vs MAE131A A00 Spring 25 T-test All Survey Questions
+% Code for MAE30A A00 Winter 25 MAE30A vs MAE131A A00 Spring 25 T-test All Survey Questions
 % Change the directory to where the csv files are downloaded
 cd('C:\Users\tigrr\Downloads')
 
@@ -69,8 +69,8 @@ MAE30A_Names = "MAE30A_" + baseNames;
 MAE131A_Names = "MAE131A_" + baseNames;
 
 % Create new sets
-MAE30A_data_fil3 = MAE30A_data_fil2
-MAE131A_data_fil3 = MAE131A_data_fil2
+MAE30A_data_fil3 = MAE30A_data_fil2;
+MAE131A_data_fil3 = MAE131A_data_fil2;
 
 % Append to sets
 MAE30A_data_fil3.Properties.VariableNames = MAE30A_Names;
@@ -85,7 +85,7 @@ MAE30A_data_unq = MAE30A_data_fil3(idx_MAE30A,:);
 MAE131A_data_unq = MAE131A_data_fil3(idx_MAE131A,:);
 
 % Now to use innerjoin to weed out anyone that isn't on both lists, since I named them different I have to use Left and Right Keys
-fullsetfil = innerjoin(MAE30A_data_unq,MAE131A_data_unq,'LeftKeys','MAE30A_PID','RightKeys','MAE131A_PID')
+fullsetfil = innerjoin(MAE30A_data_unq,MAE131A_data_unq,'LeftKeys','MAE30A_PID','RightKeys','MAE131A_PID');
 
 % We need to use the convert function again for all the data to get only the double values to run t-test
 varNames = fullsetfil.Properties.VariableNames;
@@ -118,6 +118,15 @@ for k = 1:63
     if pvals(k) <= 0.05
         prefMAE30A = "MAE30A_Q" + k;
         prefMAE131A = "MAE131A_Q" + k;
+
+        MAE30AVec = fullsetfil.(prefMAE30A);
+        MAE131AVec = fullsetfil.(prefMAE131A);
+        meanMAE30A = mean(MAE30AVec);
+        sdMAE30A   = std(MAE30AVec, 0);   % sample SD
+        meanMAE131A = mean(MAE131AVec);
+        sdMAE131A   = std(MAE131AVec, 0);   % sample SD
+        n       = numel(MAE30AVec);
+
         meandiff = mean(fullsetfil.(prefMAE131A)) - mean(fullsetfil.(prefMAE30A));
         if meandiff > 0
             meanind = "MAE131A > MAE30A, increase";
@@ -134,6 +143,10 @@ for k = 1:63
         disp("Q" + k + " is significant with p = " + string(pvals(k)));
         disp("Full question text: " + fullQuestion)
         disp("Mean Difference (MAE131A - MAE30A) = " + string(meandiff) + " -> " + meanind)
+        % MAE30A/MAE131A descriptive stats
+        disp("n = " + string(n))
+        disp("MAE30A: mean = " + string(meanMAE30A) + ", SD = " + string(sdMAE30A))
+        disp("MAE131A: mean = " + string(meanMAE131A) + ", SD = " + string(sdMAE131A))
     end
 end
 
@@ -175,6 +188,5 @@ else
     disp("Growth Mindset Question Average is not significant with p = " + string(pvalgrowth));
 end
 disp("Mean Difference (MAE131A - MAE30A) = " + string(meandiff) + " -> " + meanind);
-
 % Send back into original directory
 cd('C:\Users\tigrr\UCSD\EPDL\growthmindset')
