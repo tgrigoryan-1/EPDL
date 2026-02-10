@@ -120,6 +120,13 @@ for k = 1:63
     if pvals(k) <= 0.05
         prefBOQ = "BOQ_Q" + k;
         prefEOQ = "EOQ_Q" + k;
+        boqVec = fullsetfil.(prefBOQ);
+        eoqVec = fullsetfil.(prefEOQ);
+        meanBOQ = mean(boqVec);
+        sdBOQ   = std(boqVec, 0);   % sample SD
+        meanEOQ = mean(eoqVec);
+        sdEOQ   = std(eoqVec, 0);   % sample SD
+        n       = numel(boqVec);
         meandiff = mean(fullsetfil.(prefEOQ)) - mean(fullsetfil.(prefBOQ));
         if meandiff > 0
             meanind = "EOQ > BOQ, increase";
@@ -136,6 +143,10 @@ for k = 1:63
         disp("Q" + k + " is significant with p = " + string(pvals(k)));
         disp("Full question text: " + fullQuestion)
         disp("Mean Difference (EOQ - BOQ) = " + string(meandiff) + " -> " + meanind)
+        % BOQ/EOQ descriptive stats
+        disp("n = " + string(n))
+        disp("BOQ: mean = " + string(meanBOQ) + ", SD = " + string(sdBOQ))
+        disp("EOQ: mean = " + string(meanEOQ) + ", SD = " + string(sdEOQ))
     end
 end
 
