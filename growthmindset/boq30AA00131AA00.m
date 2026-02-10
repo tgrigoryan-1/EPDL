@@ -1,6 +1,7 @@
 % Code for MAE30A A00 Winter 25 MAE30A vs MAE131A A00 Spring 25 T-test All Survey Questions
 % Change the directory to where the csv files are downloaded
 cd('C:\Users\tigrr\Downloads')
+close all, clear, clc
 
 % Because we have a mix of strings and int values for some of the columns
 % We have to change how MATLAB reads this to not exclude any values
