@@ -59,7 +59,7 @@ MAE131A_data_fil = MAE131A_data(attn_checked_MAE131A, :);
 
 % Pulling all of the Questions (without the attention check)
 MAE30A_data_fil2 = MAE30A_data_fil(:,[3:17,19:28,30:42,44:55,57:70]);
-MAE131A_data_fil2 = MAE131A_data_fil(:,[3:16,17:27,29:41,43:54,56:69,]);
+MAE131A_data_fil2 = MAE131A_data_fil(:,[2:16,18:27,29:41,43:54,56:69,]);
 
 % Dislike current variable names and decide to rename them
 baseNames = ["Q" + (1:63), "PID"];
